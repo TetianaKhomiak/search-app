@@ -1,5 +1,5 @@
 "use strict";
-
+// to get githubAPI https://github.com/settings/developers
 // https://api.github.com
 // clientId - d9308aacf8b204d361fd
 // secretId - 84969aeef73956f4ec9e8716d1840532802bb81b
@@ -16,9 +16,9 @@ class GitHubController {
   async handleSearchInput(inputValue) {
     if (inputValue.trim() !== "") {
       const userData = await this.githubService.getUser(inputValue);
-
+      console.log(userData);
       if (userData.message) {
-        this.ui.showAlert(userData.message, "alert alert-danger");
+        this.ui.showAlert(userData.message, "alert alert-danger"); //alert alert-danger - це клас bootstrap
         return;
       }
 
@@ -111,5 +111,5 @@ const githubController = new GitHubController(githubService, ui);
 
 searchUser.addEventListener("input", async (e) => {
   const inputValue = e.target.value;
-  await githubController.handleSearchInput(inputValue);
+  await githubController.handleSearchInput(inputValue); //response.handleSearchInput(inputValue);
 });
