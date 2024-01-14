@@ -13,21 +13,23 @@ class GitHubController {
   constructor(githubService, ui) {
     this.githubService = githubService;
     this.ui = ui;
+    this.timerId = null;
   }
 
   async handleSearchInput(inputValue) {
+    clearTimeout(this.timerId);
     if (inputValue.trim() !== "") {
       const userData = await this.githubService.getUser(inputValue);
       const userRepos = await this.githubService.getRepos(inputValue);
       console.log(userData);
       if (userData.message) {
-        this.ui.showAlert(userData.message, "alert alert-danger"); //alert alert-danger - це клас bootstrap
-        return;
-
-        // setTimeout(() => {
-        //   this.ui.showAlert(userData.message, "alert alert-danger");
-        // }, 500);
+        // this.ui.showAlert(userData.message, "alert alert-danger"); //alert alert-danger - це клас bootstrap
         // return;
+
+        this.timerId = setTimeout(() => {
+          this.ui.showAlert(userData.message, "alert alert-danger");
+        }, 500);
+        return;
       }
 
       return this.ui.showProfile(userData, userRepos);
