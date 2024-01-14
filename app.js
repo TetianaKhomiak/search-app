@@ -134,7 +134,7 @@ class UI {
   clearAlert(alert) {
     setTimeout(() => {
       alert.remove();
-    }, 3000);
+    }, 2000);
   }
 }
 
