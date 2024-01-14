@@ -6,6 +6,8 @@
 
 const GITHUB_API_URL = "https://api.github.com";
 const searchUser = document.querySelector(".searchUser");
+// const PERSONAL_ACCESS_TOKEN =
+//   "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";
 
 class GitHubController {
   constructor(githubService, ui) {
@@ -21,6 +23,11 @@ class GitHubController {
       if (userData.message) {
         this.ui.showAlert(userData.message, "alert alert-danger"); //alert alert-danger - це клас bootstrap
         return;
+
+        // setTimeout(() => {
+        //   this.ui.showAlert(userData.message, "alert alert-danger");
+        // }, 500);
+        // return;
       }
 
       return this.ui.showProfile(userData, userRepos);
@@ -48,7 +55,7 @@ class GitHubService {
 
   async getRepos(userName) {
     const response = await fetch(
-      `${GITHUB_API_URL}/users/${userName}/repos?sort=created?client_id=${this.clientId}&client_secret=${this.secretId}`
+      `${GITHUB_API_URL}/users/${userName}/repos?sort=created&client_id=${this.clientId}&client_secret=${this.secretId}`
     );
 
     const repos = await response.json();
@@ -133,10 +140,17 @@ const ui = new UI();
 const githubService = new GitHubService(
   "Iv1.98814f93824cd127",
   "72b8a59ceebfa44e432877d0f8c00837c6e93984"
+  // "d5217454c81aadfc886b",
+  // "dfb244b437ea81b7b0948952329f493c7ee819a9"
 );
 const githubController = new GitHubController(githubService, ui);
 
+let timerId;
 searchUser.addEventListener("input", async (e) => {
   const inputValue = e.target.value;
-  await githubController.handleSearchInput(inputValue); //response.handleSearchInput(inputValue);
+  clearTimeout(timerId);
+  timerId = setTimeout(async () => {
+    await githubController.handleSearchInput(inputValue);
+  }, 500);
+  // await githubController.handleSearchInput(inputValue); //response.handleSearchInput(inputValue);
 });
