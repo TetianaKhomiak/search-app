@@ -48,7 +48,7 @@ class GitHubService {
 
   async getRepos(userName) {
     const response = await fetch(
-      `${GITHUB_API_URL}/users/${userName}/repos?sort=created&per_page=5?client_id=${this.clientId}&client_secret=${this.secretId}`
+      `${GITHUB_API_URL}/users/${userName}/repos?sort=created?client_id=${this.clientId}&client_secret=${this.secretId}`
     );
 
     const repos = await response.json();
