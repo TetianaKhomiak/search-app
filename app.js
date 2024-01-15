@@ -212,10 +212,9 @@ class GitHubServiceUser {
   }
 }
 
-class GitHubServiceRepos {
+class GitHubServiceRepos extends GitHubServiceUser {
   constructor(clientId, secretId) {
-    this.clientId = clientId;
-    this.secretId = secretId;
+    super(clientId, secretId);
   }
   async getRepos(userName) {
     const response = await fetch(
@@ -308,12 +307,7 @@ const gitHubServiceUser = new GitHubServiceUser(
   // "dfb244b437ea81b7b0948952329f493c7ee819a9"
 );
 
-const gitHubServiceRepos = new GitHubServiceRepos(
-  "Iv1.98814f93824cd127",
-  "72b8a59ceebfa44e432877d0f8c00837c6e93984"
-  // "d5217454c81aadfc886b",
-  // "dfb244b437ea81b7b0948952329f493c7ee819a9"
-);
+const gitHubServiceRepos = new GitHubServiceRepos();
 
 const githubController = new GitHubController(
   gitHubServiceUser,
