@@ -3,7 +3,7 @@
 ## Page preview
 > https://tetianakhomiak.github.io/search-app/
 
- ## Tools 📋
+ ## Toolkit💻
  ⚡️ HTML5                                                                                                                                                             
  ⚡️ CSS3                                                                                                                                                             
  ⚡️ JavaScript (OOP)                                                                                                                                                       
